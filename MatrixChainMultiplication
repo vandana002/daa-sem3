@@ -37,3 +37,6 @@ for L in range(2,n):
 print("the minimum no.of multiplications are ",m[1][n-1])
 print("and the order is ")
 printbest(b,1,n-1)
+
+
+Time complexitity:O(n^3) where extra spaces take O(n^2)
