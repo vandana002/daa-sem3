@@ -32,3 +32,7 @@ heapSort(arr)
 print("\nSorted array:")
 for i in range(n):
 print("%d " % arr[i], end = '')
+
+Best Time Complexity: O(nlogn)
+Average Time Complexity: O(nlogn)
+Worst Time Complexity: O(nlogn)
