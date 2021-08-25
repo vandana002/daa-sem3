@@ -1,4 +1,4 @@
-[10:23 am, 23/08/2021] Greeshma 🐬: print("enter the objects : ")
+print("enter the objects : ")
 O=list(map(str,input().split(" ")))
 print("enter the objects' profits : ")
 P=list(map(int,input().split(" ")))
