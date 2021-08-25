@@ -1,44 +1,33 @@
 //Prims
-def prims():
-    global vertices,graph,min_weight
-    visited=[False]*vertices
-    visited[0]=True
-    num_edges=0
-    while(num_edges<vertices-1):
-        min=99999
-        x=0
-        y=0
-        for i in range(vertices):
-            if visited[i]:
-                for j in range(vertices):
-                    if( (not visited[j]) and graph[i][j]):
-                        if min>graph[i][j]:
-                            min=graph[i][j]
-                            x=i
-                            y=j
+INF = 9999999
+V = 5
+G = [[0, 9, 75, 0, 0],
+[9, 0, 95, 19, 42],
+[75, 95, 0, 51, 66],
+[0, 19, 51, 0, 31],
+[0, 42, 66, 31, 0]]
 
-        print(x,"--",y,"-->",graph[x][y])
-        min_weight+=graph[x][y]
-        visited[y]=True
-        num_edges+=1
-    
-min_weight=0
+selected = [0, 0, 0, 0, 0]
+no_edge = 0
+selected[0] = True
+print("Edge : Weight\n")
+while (no_edge < V - 1):
+    minimum = INF
+    x = 0
+    y = 0
+    for i in range(V):
+        if selected[i]:
+            for j in range(V):
+                if ((not selected[j]) and G[i][j]):
+                    if minimum > G[i][j]:
+                        minimum = G[i][j]
+                        x = i
+                        y = j
 
-vertices=int(input('Number of vertices : '))
-graph=[list(map(int,input().split())) for i in range(vertices)]
-print ("Edges and their weights")
-prims()
-print('\nMinimum weight : ',min_weight)
- 
-'''
-5
-0 2 0 6 0
-2 0 3 8 5
-0 3 0 0 7
-6 8 0 0 9
-0 5 7 9 0
-
-'''
+    print(str(x) + "-" + str(y) + ":" +
+    str(G[x][y])) 
+    selected[y] = True
+    no_edge += 1
 //The time complexity of Prim's algorithm is O(E log V).
 
 
