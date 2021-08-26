@@ -1,72 +1,30 @@
-import random
-import timeit
-import matplotlib.pyplot as plt
-import math
-def partition(list,start,end):
-pivot=list[end]
-x=start
-y=end-1
-global com
-while True:
-while x<=y and list[x]<=pivot:
-x+=1
-com+=1
-while x<=y and list[y]>=pivot:
-y-=1
-com+=1
-if(x<y):
-list[x],list[y]=list[y],list[x]
-com+=1
-else:
-com+=1
-break
-list[end],list[x]=list[x],list[end]
-return x
+def partition(A, start, end):
 
-def quickSort(list,start,end):
-if start<end:
-z=partition(list,start,end)
-quickSort(list,start,z-1)
-quickSort(list,z+1,end)
-timeList=[]
+    pivot = A[end] 
+    pIndex = start 
 
-comList=[]
-for i in range(200):
-com=1
-arr=[]
-for j in range(0,i):
-n = random.randint(1,100)
-arr.append(n)
-start = timeit.default_timer()
-quickSort(arr,0,i-1)
-end = timeit.default_timer()
-print(arr)
-total=end-start
-timeList.append(total)
-comList.append(com)
+    for i in range(start, len(A)):
+        if A[i] < pivot:
+            A[i], A[pIndex] = A[pIndex], A[i]
+            pIndex += 1
+    A[pIndex], A[end] = A[end], A[pIndex]
 
-timeList = [x * 1000 for x in timeList]
-avgtime=0
-for i in timeList:
-avgtime+=i
-avgtime/=200
-n = [*range(1, 201, 1)]
-nn=[]
-for x in n:
+    return pIndex
 
-nn.append(math.pow(x,2))
+def quickSort(A, start, end):
+    if start >=end:
+        return
+    else:
+        pIndex = partition(A, start, end)
+        quickSort(A, start, pIndex - 1)
+        quickSort(A, pIndex + 1, end)
 
-nnn=[]
-for x in n:
 
-nnn.append(x*math.log(x,2))
-
-print("Time required = ",avgtime)
-plt.plot(comList,n,color='yellow', linewidth=3,label='Quicksort time')
-plt.plot(nn,n,color='red', linewidth=3,label='n^2')
-plt.plot(nnn,n,color='blue', linewidth=3,label='nlogn')
-plt.title('Quick Sort Running time')
-plt.xlabel('value of time')
-plt.ylabel('value of n')
-plt.legend()
-plt.show()
+if __name__ == '__main__':
+    
+    A = [7,2,1,6,8,5,3,4]
+    start = 0
+    end = len(A) - 1
+    print("Unsorted Array: ",A)
+    quickSort(A, start, end)
+    print("Sorted Array: ",A)
